@@ -27,24 +27,26 @@ class Login extends React.Component {
             localStorage.setItem("storedId", users.id)
             this.setState({ users })
           } else {
-            alert("No such email found");
+            alert("No such email found")
+            this.setState({email: ''})
           } 
         })
         
   }
 
   render(){
-    console.log(this.state.users)
+    //console.log(this.state.users)
     return (
       <div>
         {
           localStorage.length != 0 ? 
             <Redirect to={`/userProfile/${localStorage.getItem('storedId')}`} />
           : 
-            <div>
+            <div className='loginForm'>
               <h2>Login</h2>
               <form onSubmit={this.handleSubmit}>
                 <input
+                  className='eInput'
                   type="email"
                   id="email"
                   name="email"
@@ -57,7 +59,7 @@ class Login extends React.Component {
             </div>
         }
       </div>
-    );
+    )
   }
 }
 
