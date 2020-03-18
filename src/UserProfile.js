@@ -1,18 +1,19 @@
 import React from 'react'
 import axios from 'axios'
+import { Redirect } from 'react-router-dom'
 
 class UserProfile extends React.Component{
     constructor(){
         super()
         this.state={
             user:[],
-            posts:[]
+            posts:[],
+            redirect:false
         }
     }
 
     componentDidMount(){
-        console.log('user profile component', this.props.passId)
-        const uid = localStorage.length != 0 ? localStorage.getItem('storedId') : this.props.passId
+        const uid = localStorage.length != 0 ? localStorage.getItem('storedId') : this.props.match.params.id
         axios
           .get(
             `https://jsonplaceholder.typicode.com/users/${uid}`
@@ -41,13 +42,15 @@ class UserProfile extends React.Component{
     
     handleOut=()=>{
         localStorage.clear()
-        window.location.reload(false)
+        //window.location.reload(false)
+        this.setState({redirect:true})
     }
 
     render(){
         //console.log(this.state.user,this.state.posts)
         return (
           <div>
+            {this.state.redirect && <Redirect to='/login'/> }
             <button onClick={this.handleOut}>Log out</button>
             <h2>{this.state.user.name}</h2>
             <p>{this.state.user.email}</p>
