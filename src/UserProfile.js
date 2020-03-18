@@ -50,7 +50,7 @@ class UserProfile extends React.Component{
         //console.log(this.state.user,this.state.posts)
         return (
           <div>
-            {this.state.redirect && <Redirect to='/login'/> }
+            {this.state.redirect && <Redirect to='/'/> }
             <button onClick={this.handleOut}>Log out</button>
             <h2>{this.state.user.name}</h2>
             <p>{this.state.user.email}</p>

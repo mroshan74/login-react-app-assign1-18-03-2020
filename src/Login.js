@@ -39,7 +39,7 @@ class Login extends React.Component {
       <div>
         {
           localStorage.length != 0 ? 
-            <Redirect to={`/userProfile/${this.state.users.id}`} />
+            <Redirect to={`/userProfile/${localStorage.getItem('storedId')}`} />
           : 
             <div>
               <h2>Login</h2>
