@@ -38,15 +38,15 @@ class Login extends React.Component {
     //console.log(this.state.users)
     return (
       <div>
-        {
-          localStorage.length != 0 ? 
-            <Redirect to={`/userProfile/${localStorage.getItem('storedId')}`} />
-          : 
-            <div className='loginForm'>
+        {localStorage.length != 0 ? (
+          <Redirect to={`/userProfile/${localStorage.getItem("storedId")}`} />
+        ) : (
+          <div>
+            <div className="loginForm">
               <h2>Login</h2>
               <form onSubmit={this.handleSubmit}>
                 <input
-                  className='eInput'
+                  className="eInput"
                   type="email"
                   id="email"
                   name="email"
@@ -57,7 +57,14 @@ class Login extends React.Component {
                 <p> type email and press enter</p>
               </form>
             </div>
-        }
+            <div className="test">
+              <h4><u><em>test emails</em></u></h4>
+              <p>Sincere@april.biz</p>
+              <p>Nathan@yesenia.net</p>
+              <p>Karley_Dach@jasper.info</p>
+            </div>
+          </div>
+          )}
       </div>
     )
   }
