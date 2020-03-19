@@ -13,30 +13,34 @@ class UserProfile extends React.Component{
     }
 
     componentDidMount(){
-        const uid = localStorage.length != 0 ? localStorage.getItem('storedId') : this.props.match.params.id
-        axios
-          .get(
-            `https://jsonplaceholder.typicode.com/users/${uid}`
-          )
-          .then(response => {
-            const user = response.data;
-            this.setState({ user });
-          })
-          .catch(err => {
-            console.log(err);
-          });
+      console.log(this.props)
+        if (localStorage.length != 0) {  // non login retention check
+          const uid = localStorage.getItem("storedId")
+          axios
+            .get(`https://jsonplaceholder.typicode.com/users/${uid}`)
+            .then(response => {
+              const user = response.data
+              this.setState({ user })
+            })
+            .catch(err => {
+              console.log(err)
+            })
 
-        axios
-          .get(
-            `https://jsonplaceholder.typicode.com/posts?userId=${uid}`
-          )
-          .then(response => {
-            const posts = response.data;
-            this.setState({ posts });
-          })
-          .catch(err => {
-            console.log(err);
-          });
+          axios
+            .get(`https://jsonplaceholder.typicode.com/posts?userId=${uid}`)
+            .then(response => {
+              const posts = response.data
+              this.setState({ posts })
+            })
+            .catch(err => {
+              console.log(err)
+            })
+          } 
+          
+          else {
+              alert('you are not logged in')
+              this.setState({ redirect: true })
+        }
         
     }
     
@@ -49,6 +53,7 @@ class UserProfile extends React.Component{
     render(){
         //console.log(this.state.user,this.state.posts)
         return (
+
           <div className='userDiv'>
             {this.state.redirect && <Redirect to='/'/> }
             <button className='btn' onClick={this.handleOut}>Log out</button>
