@@ -7,9 +7,7 @@ class Login extends React.Component {
     super();
     this.state = {
       email: "",
-      users:[],
-      status: false,
-      id:''
+      users:[]
     }
   }
 
